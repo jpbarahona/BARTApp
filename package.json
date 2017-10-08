@@ -1,0 +1,21 @@
+{
+  "name": "BARTApp",
+  "version": "0.0.0",
+  "description": "Bart App Electron AWS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jpbarahona/BARTApp.git"
+  },
+  "keywords": [
+    "npm"
+  ],
+  "author": "Juan Pablo Barahona",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jpbarahona/BARTApp/issues"
+  }
+}
