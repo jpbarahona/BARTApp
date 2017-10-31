@@ -1,3 +1,10 @@
+/*!
+ * @author juan-pablo barahona
+ *
+ * @require Ember v2.4.1
+ * @reference https://emberjs.com/api/ember/2.4/classes/Ember.Application
+ */
+
 App = Ember.Application.create();
 
 App.Router.map(function() {
@@ -11,8 +18,8 @@ App.IndexRoute = Em.Route.extend({
 });
 
 App.IntroView = Em.View.extend({
-	 didInsertElement: function() {
-        console.log("Index view");
+	didInsertElement: function() {
+        
     },
     touchEnd: function(e) {
         

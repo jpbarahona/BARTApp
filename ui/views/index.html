@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+
+        <title>BART</title>
+
+        <meta charset="utf-8" />
+        
+        <!-- these files are required for the BART to work -->
+        <script type="text/javascript" src="../public/js/libs.min.js"></script>          <!-- ember lib api -->
+        <script type="text/javascript" src="../public/js/jquery-3.0.0.min.js"></script>  <!-- basic javascript library for dom manipulation -->
+        <script type="text/javascript" src="../public/js/jcanvas.min.js"></script>       <!-- the canvas plugin -->
+        <script type="text/javascript" src="../public/js/jquery.bart.js"></script>       <!-- the main BART plugin -->
+        <link rel="stylesheet" type="text/css" href="../public/css/jquery.bart.css" />    <!-- additional styles for to make the BART look fancy -->
+        <script type="text/javascript" src="../ctrl/ember.js"></script>             <!-- route -->
+
+        <!-- additional scripts to run the demo on this page -->
+        <script type="text/javascript">
+            //<![CDATA[
+            var SUBJID;
+            
+            // Helper for enterKey in inputs
+            $.fn.enterKey = function (fnc) {
+                return this.each(function () {
+                    $(this).keypress(function (ev) {
+                        var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+                        if (keycode == '13') {
+                            fnc.call(this, ev);
+                        }
+                    })
+                })
+            }
+            
+            // initialize the BART after the page has loaded
+            $(document).ready(function () {
+                // Setup BART
+                var bOpts = {
+                    min_pump: 2, 
+                    earnings: 30,
+                    onstart: function(){ this.start_time= $.now(); },
+                    onexplode: function(){ this.end_time = $.now(); },
+                    oncashin: function(){ this.end_time = $.now(); }
+                };
+
+                // create a BART with default values using 10 balloons
+                $("#bart").bart(
+                    {b: [
+                            {b: 1, o: $.extend({color: 'blue', popprob: 8 }, bOpts)},
+                            /*{b: 7, o: $.extend({color: 'blue', popprob: 8 }, bOpts)},
+                            {b: 6, o: $.extend({color: 'yellow', popprob: 32}, bOpts)},
+                            {b: 7, o: $.extend({color: 'red', popprob: 128 }, bOpts)}*/
+                        ],
+                        s: {
+                            txt_cashin: 'Colectar $$$',
+                            txt_inflate: 'Inflar',
+                            txt_next: 'Próximo',
+                            txt_balloon_number: 'Globos: ',
+                            txt_number_of_pumps: 'Cantidad inflado: ',
+                            txt_current_earned: 'Ganancias: ',
+                            txt_total_earned: 'Total acumulado: R$ ',
+                            txt_prob_explosion: 'Probabilidad de explotar: ',
+                            txt_pumps_used: 'Inflados utilizados: ',
+                            showpopprob: false,
+                            sounds: true,
+                            onload: function () {
+                                this.start_time = $.now();
+                            },
+                            onend: function () {
+                                this.end_time = $.now();
+                                this.balloon = null;
+                                console.log(this);
+                                console.log(JSON.stringify(this));
+                                data = {bart: JSON.stringify(this), subjid: SUBJID};
+                                $.post('save.php', data);
+                            }
+                        }
+                    }
+                );
+
+                // Getting SUBJID
+                SUBJID = prompt("SUBJID:", "");
+                $('#subjid').text( SUBJID );
+            });
+
+            //]]>
+        </script>
+    </head>
+    <body>
+
+        <!--<h1 style="text-align: center;">BART</h1>
+        <h3 id="subjid">_____</h3>-->
+        
+        <script type="text/x-handlebars" data-template-name="intro" >
+            <!-- load BART here -->
+            <div id="bart" style="width: 600px; margin:auto;"></div>
+        </script>     
+
+    </body>
+
+</html>
