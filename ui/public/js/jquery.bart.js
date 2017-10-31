@@ -144,7 +144,7 @@
             showpumpsused: false,            // show percentage of pumps used
             sounds: true,                    // play sounds
             earned: 0,                       // initial earnings
-            sndpath: '../public/sounds/',    // path to sound files
+            sndpath: 'public/sounds/',    // path to sound files
             randomize:       true,           // randomize order of balloons
             frmid:           'bartdat',      // hidden form element to save all data to
             separator:       [':', ';'],     // value separators in hidden form field (0: within in balloon, 1: between ballons)

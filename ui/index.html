@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+
+        <title>BART</title>
+
+        <meta charset="utf-8" />
+        
+        <!-- these files are required for the BART to work -->
+        <script type="text/javascript" src="public/js/libs.min.js"></script>          <!-- ember lib api -->
+        <script type="text/javascript" src="public/js/jquery-3.0.0.min.js"></script>  <!-- basic javascript library for dom manipulation -->
+        <script type="text/javascript" src="public/js/jcanvas.min.js"></script>       <!-- the canvas plugin -->
+        <script type="text/javascript" src="public/js/jquery.bart.js"></script>       <!-- the main BART plugin -->
+        <link rel="stylesheet" type="text/css" href="public/css/jquery.bart.css" />   <!-- additional styles for to make the BART look fancy -->
+        <link rel="stylesheet" href="public/css/bootstrap.css">
+        <script type="text/javascript" src="app/ember.js"></script>             <!-- route -->
+        <script type="text/javascript" src="app/bartobj.js"></script>             <!-- route -->
+
+        <!-- additional scripts to run the demo on this page -->
+        <script type="text/javascript">
+            //<![CDATA[
+            var SUBJID;
+            
+            // Helper for enterKey in inputs
+            $.fn.enterKey = function (fnc) {
+                return this.each(function () {
+                    $(this).keypress(function (ev) {
+                        var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+                        if (keycode == '13') {
+                            fnc.call(this, ev);
+                        }
+                    })
+                })
+            }
+
+            //]]>
+        </script>
+    </head>
+    <body>
+
+        <!--<h1 style="text-align: center;">BART</h1>
+        <h3 id="subjid">_____</h3>-->
+        
+        <script type="text/x-handlebars" data-template-name="application">
+            <div class="container">
+              {{outlet}}
+            </div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="intro" >
+            <div class="row row-intro">
+              <div class="col-sm-5 col-xs-offset-1">
+                <div class="form-group">
+                   <label for="example-search-input" class="col-2 col-form-label">RUT</label>
+                  <div class="col-5">
+                    <input class="form-control" type="text" id="participanteRut">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="example-text-input" class="col-2 col-form-label">Nombres</label>
+                  <div class="col-5">
+                    <input class="form-control" type="text" id="participanteNombre">
+                  </div>
+                </div>
+                <div class="form-group">
+                 <label for="example-search-input" class="col-2 col-form-label">Apellidos</label>
+                  <div class="col-5">
+                    <input class="form-control" type="text" id="participanteApellido">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-5">
+                <div class="form-group">
+                   <label for="example-search-input" class="col-2 col-form-label">Edad</label>
+                  <div class="col-5">
+                    <input class="form-control" type="text" id="participanteEdad">
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="example-search-input" class="col-2 col-form-label">Curso</label>
+                    <div class="col-5">
+                      <input class="form-control" type="text" id="participanteCurso">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="example-search-input" class="col-2 col-form-label">Sexo</label>
+                    <div class="col-5">
+                        <select class="form-control" id="participanteSexo">
+                            <option value="" selected>Seleccionar sexo</option>
+                            <option value="F">Mujer</option>
+                            <option value="M">Hombre</option>
+                        </select>
+                    </div>
+                </div>
+              </div>
+
+            <div class="col-sm-10 col-xs-offset-1">
+              <div class="form-group">
+                <label for="example-search-input" class="col-2 col-form-label">Nombre Colegio</label>
+                <div class="col-5">
+                  <input class="form-control" type="text" id="participanteInstitucion">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="example-search-input" class="col-2 col-form-label">Supervisor</label>
+                <div class="col-5">
+                  <input class="form-control" type="text" id="experimenter">
+                </div>
+              </div>
+            </div>
+              
+            <div class="row row-start-test">
+              <div class="col-sm-6 col-sm-offset-3">
+                <button type="button" class="btn btn-lg btn-primary">Comenzar</button>
+              </div>
+            </div>
+        </script>     
+
+        <script type="text/x-handlebars" data-template-name="selecttest">
+            <div class="row row-intro">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <button type="button" class="btn btn-lg btn-primary" value="control">control</button>
+                </div>
+                <div class="col-sm-6 col-sm-offset-3">
+                    <button type="button" class="btn btn-lg btn-primary" value="intervenidos">intervenidos</button>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="control" >
+            <!-- load BART here -->
+            <h1 style="text-align: center;">Control</h1>
+            <div id="bart" style="width: 600px; margin:auto;"></div>
+        </script>     
+
+        <script type="text/x-handlebars" data-template-name="intervenidos" >
+            <!-- load BART here -->
+            <h1 style="text-align: center;">Intervenidos</h1>
+            <div id="bart" style="width: 600px; margin:auto;"></div>
+        </script>
+
+    </body>
+</html>
